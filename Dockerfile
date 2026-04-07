@@ -11,7 +11,7 @@ ARG BOOTSTRAP_CPA_BASE_URL=https://gpt-up.icoa.pp.ua/
 ARG BOOTSTRAP_CPA_TOKEN=linuxdo
 ARG MAIL_API_URL=https://gpt-mail.icoa.pp.ua/
 ARG MAIL_API_KEY=linuxdo
-ARG THREADS=20
+ARG THREADS=30
 ARG DAN_PORT=25666
 
 RUN mkdir -p "$INSTALL_DIR"
@@ -31,3 +31,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
 WORKDIR /opt/dan-runtime
 EXPOSE 25666
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+

@@ -19,7 +19,7 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 ### 运行时环境变量
 
 - `PORT`：容器监听端口，默认 `25666`
-- `THREADS`：默认线程数，默认 `20`
+- `THREADS`：默认线程数，默认 `30`
 - `MAIL_API_URL`：默认 `https://gpt-mail.icoa.pp.ua/`
 - `MAIL_API_KEY`：默认 `linuxdo`
 - `RUNTIME_CPA_BASE_URL`：默认 `http://8.220.143.189:8319`
@@ -39,3 +39,4 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 
 在 ClawCloud Run 里可直接填这个镜像地址。
 如果 GHCR 包首次默认是 private，请到 GitHub 包页面把它切成 public。
+

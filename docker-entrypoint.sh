@@ -4,7 +4,7 @@ set -euo pipefail
 INSTALL_DIR="${INSTALL_DIR:-/opt/dan-runtime}"
 CONFIG_FILE="$INSTALL_DIR/config/web_config.json"
 PORT_VALUE="${PORT:-${DAN_PORT:-25666}}"
-THREADS_VALUE="${THREADS:-20}"
+THREADS_VALUE="${THREADS:-30}"
 MAIL_API_URL_VALUE="${MAIL_API_URL:-https://gpt-mail.icoa.pp.ua/}"
 MAIL_API_KEY_VALUE="${MAIL_API_KEY:-linuxdo}"
 RUNTIME_CPA_BASE_URL_VALUE="${RUNTIME_CPA_BASE_URL:-http://8.220.143.189:8319}"
@@ -30,3 +30,4 @@ print('[entrypoint] mail_api_url=', data['mail_api_url'])
 PY
 
 exec "$INSTALL_DIR/dan-web"
+
