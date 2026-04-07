@@ -29,3 +29,13 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 
 镜像构建阶段会使用 `https://gpt-up.icoa.pp.ua/` 拉 domains；
 容器启动阶段会自动把配置切回你自己的 CPA。
+
+## GitHub Container Registry (GHCR)
+
+本仓库已配置 GitHub Actions 自动构建镜像。
+当 `main` 分支有新提交时，会自动推送：
+
+- `ghcr.io/zc12120/dan-installers:latest`
+
+在 ClawCloud Run 里可直接填这个镜像地址。
+如果 GHCR 包首次默认是 private，请到 GitHub 包页面把它切成 public。
