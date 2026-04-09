@@ -3,8 +3,18 @@
 ## 一键安装脚本
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zc12120/dan-installers/main/install_dan_gptup_gptmail.sh | bash -s -- install 20
+curl -fsSL https://raw.githubusercontent.com/zc12120/dan-installers/main/install_dan_gptup_gptmail.sh | bash -s -- install 30
 ```
+
+## 当前逻辑
+
+- 安装阶段用 `https://gpt-up.icoa.pp.ua/` 拉 `domains`
+- 运行阶段自动启动本地 `CPA bridge`
+- `CPA bridge` 会把：
+  - `/v0/management/domains` 转发到 `gpt-up`
+  - 其他 CPA 请求转发到你的 `http://8.220.143.189:8319`
+
+这样可以兼容“你的 CPA 没有 domains 接口，但运行期仍然要接入你自己的 CPA”这个场景。
 
 ## ClawCloud Run / 容器部署
 
@@ -20,15 +30,18 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 
 - `PORT`：容器监听端口，默认 `25666`
 - `THREADS`：默认线程数，默认 `30`
+- `BRIDGE_PORT`：本地 CPA bridge 端口，默认 `18319`
 - `MAIL_API_URL`：默认 `https://gpt-mail.icoa.pp.ua/`
 - `MAIL_API_KEY`：默认 `linuxdo`
+- `BOOTSTRAP_CPA_BASE_URL`：默认 `https://gpt-up.icoa.pp.ua/`
+- `BOOTSTRAP_CPA_TOKEN`：默认 `linuxdo`
 - `RUNTIME_CPA_BASE_URL`：默认 `http://8.220.143.189:8319`
 - `RUNTIME_CPA_TOKEN`：默认 `114514`
 
 ### 注意
 
 镜像构建阶段会使用 `https://gpt-up.icoa.pp.ua/` 拉 domains；
-容器启动阶段会自动把配置切回你自己的 CPA。
+容器启动阶段会自动起本地 `CPA bridge`，并把配置指向 `http://127.0.0.1:$BRIDGE_PORT`。
 
 ## GitHub Container Registry (GHCR)
 

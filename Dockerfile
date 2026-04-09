@@ -24,8 +24,10 @@ RUN curl -fsSL https://raw.githubusercontent.com/uton88/dan-binary-releases/main
     --threads "$THREADS" \
     --port "$DAN_PORT"
 
+COPY cpa-bridge.py /usr/local/bin/cpa-bridge.py
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/cpa-bridge.py \
     && rm -f "$INSTALL_DIR/dan-web.log" "$INSTALL_DIR/dan-web.pid"
 
 WORKDIR /opt/dan-runtime
