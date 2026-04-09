@@ -255,11 +255,12 @@ from pathlib import Path
 import json
 p = Path(${install_dir@Q}) / 'config' / 'web_config.json'
 data = json.loads(p.read_text(encoding='utf-8'))
+bridge_port = int(${bridge_port@Q})
 data['manual_default_threads'] = int(${threads@Q})
 data['port'] = int(${port@Q})
 data['mail_api_url'] = ${mail_api_url@Q}
 data['mail_api_key'] = ${mail_api_key@Q}
-data['cpa_base_url'] = f'http://127.0.0.1:{int(${bridge_port@Q})}'
+data['cpa_base_url'] = f'http://127.0.0.1:{bridge_port}'
 data['cpa_token'] = ${runtime_cpa_token@Q}
 p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
 print('[patch] web_config.json 已改为本地 CPA bridge')

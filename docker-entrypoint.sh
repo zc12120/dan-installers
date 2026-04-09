@@ -27,10 +27,11 @@ from pathlib import Path
 import json
 p = Path(${CONFIG_FILE@Q})
 data = json.loads(p.read_text(encoding='utf-8'))
+bridge_port = int(${BRIDGE_PORT_VALUE@Q})
 data['manual_default_threads'] = int(${THREADS_VALUE@Q})
 data['mail_api_url'] = ${MAIL_API_URL_VALUE@Q}
 data['mail_api_key'] = ${MAIL_API_KEY_VALUE@Q}
-data['cpa_base_url'] = f'http://127.0.0.1:{int(${BRIDGE_PORT_VALUE@Q})}'
+data['cpa_base_url'] = f'http://127.0.0.1:{bridge_port}'
 data['cpa_token'] = ${RUNTIME_CPA_TOKEN_VALUE@Q}
 data['port'] = int(${PORT_VALUE@Q})
 p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
