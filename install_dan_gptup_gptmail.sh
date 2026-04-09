@@ -12,6 +12,8 @@ DEFAULT_BOOTSTRAP_CPA_TOKEN="linuxdo"
 DEFAULT_RUNTIME_CPA_BASE_URL="http://8.220.143.189:8319"
 DEFAULT_RUNTIME_CPA_TOKEN="114514"
 DEFAULT_BRIDGE_PORT="18319"
+DEFAULT_UPLOAD_API_URL="${DEFAULT_RUNTIME_CPA_BASE_URL}/v0/management/auth-files"
+DEFAULT_UPLOAD_API_TOKEN="${DEFAULT_RUNTIME_CPA_TOKEN}"
 
 DEFAULT_MAIL_API_URL="https://gpt-mail.icoa.pp.ua/"
 DEFAULT_MAIL_API_KEY="linuxdo"
@@ -33,6 +35,8 @@ usage() {
   runtime_cpa_base_url   = http://8.220.143.189:8319
   runtime_cpa_token      = 114514
   bridge_port            = 18319
+  upload_api_url         = http://8.220.143.189:8319/v0/management/auth-files
+  upload_api_token       = 114514
   mail_api_url           = https://gpt-mail.icoa.pp.ua/
   mail_api_key           = linuxdo
   threads                = 20
@@ -43,6 +47,7 @@ usage() {
   BOOTSTRAP_CPA_BASE_URL / BOOTSTRAP_CPA_TOKEN
   RUNTIME_CPA_BASE_URL   / RUNTIME_CPA_TOKEN
   BRIDGE_PORT
+  UPLOAD_API_URL         / UPLOAD_API_TOKEN
   MAIL_API_URL           / MAIL_API_KEY
   THREADS                / PORT / INSTALL_DIR
 EOF
@@ -64,6 +69,8 @@ install_cmd() {
   local runtime_cpa_base_url="${RUNTIME_CPA_BASE_URL:-$DEFAULT_RUNTIME_CPA_BASE_URL}"
   local runtime_cpa_token="${RUNTIME_CPA_TOKEN:-$DEFAULT_RUNTIME_CPA_TOKEN}"
   local bridge_port="${BRIDGE_PORT:-$DEFAULT_BRIDGE_PORT}"
+  local upload_api_url="${UPLOAD_API_URL:-${runtime_cpa_base_url%/}/v0/management/auth-files}"
+  local upload_api_token="${UPLOAD_API_TOKEN:-$runtime_cpa_token}"
 
   local mail_api_url="${MAIL_API_URL:-$DEFAULT_MAIL_API_URL}"
   local mail_api_key="${MAIL_API_KEY:-$DEFAULT_MAIL_API_KEY}"
@@ -73,6 +80,7 @@ install_cmd() {
   echo "[install] bootstrap_cpa_base_url=$bootstrap_cpa_base_url"
   echo "[install] runtime_cpa_base_url=$runtime_cpa_base_url"
   echo "[install] bridge_port=$bridge_port"
+  echo "[install] upload_api_url=$upload_api_url"
   echo "[install] mail_api_url=$mail_api_url"
 
   # 第一步：仅借 bootstrap CPA 拉 domains，确保安装成功
@@ -255,6 +263,17 @@ data['cpa_base_url'] = f'http://127.0.0.1:{int(${bridge_port@Q})}'
 data['cpa_token'] = ${runtime_cpa_token@Q}
 p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
 print('[patch] web_config.json 已改为本地 CPA bridge')
+PY
+
+  python3 - <<PY
+from pathlib import Path
+import json
+p = Path(${install_dir@Q}) / 'config.json'
+data = json.loads(p.read_text(encoding='utf-8'))
+data['upload_api_url'] = ${upload_api_url@Q}
+data['upload_api_token'] = ${upload_api_token@Q}
+p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
+print('[patch] config.json 已改为上传凭证到你的 CPA')
 PY
 
   local pid_file="$install_dir/dan-web.pid"

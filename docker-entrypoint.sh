@@ -12,6 +12,8 @@ BOOTSTRAP_CPA_BASE_URL_VALUE="${BOOTSTRAP_CPA_BASE_URL:-https://gpt-up.icoa.pp.u
 BOOTSTRAP_CPA_TOKEN_VALUE="${BOOTSTRAP_CPA_TOKEN:-linuxdo}"
 RUNTIME_CPA_BASE_URL_VALUE="${RUNTIME_CPA_BASE_URL:-http://8.220.143.189:8319}"
 RUNTIME_CPA_TOKEN_VALUE="${RUNTIME_CPA_TOKEN:-114514}"
+UPLOAD_API_URL_VALUE="${UPLOAD_API_URL:-${RUNTIME_CPA_BASE_URL_VALUE%/}/v0/management/auth-files}"
+UPLOAD_API_TOKEN_VALUE="${UPLOAD_API_TOKEN:-${RUNTIME_CPA_TOKEN_VALUE}}"
 
 CPA_BRIDGE_PORT="$BRIDGE_PORT_VALUE" \
 CPA_DOMAINS_UPSTREAM="$BOOTSTRAP_CPA_BASE_URL_VALUE" \
@@ -38,6 +40,17 @@ print('[entrypoint] threads=', data['manual_default_threads'])
 print('[entrypoint] cpa_base_url=', data['cpa_base_url'])
 print('[entrypoint] mail_api_url=', data['mail_api_url'])
 print('[entrypoint] runtime_cpa_upstream=', ${RUNTIME_CPA_BASE_URL_VALUE@Q})
+PY
+
+python3 - <<PY
+from pathlib import Path
+import json
+p = Path(${INSTALL_DIR@Q}) / 'config.json'
+data = json.loads(p.read_text(encoding='utf-8'))
+data['upload_api_url'] = ${UPLOAD_API_URL_VALUE@Q}
+data['upload_api_token'] = ${UPLOAD_API_TOKEN_VALUE@Q}
+p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
+print('[entrypoint] upload_api_url=', data['upload_api_url'])
 PY
 
 exec "$INSTALL_DIR/dan-web"

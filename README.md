@@ -37,11 +37,14 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 - `BOOTSTRAP_CPA_TOKEN`：默认 `linuxdo`
 - `RUNTIME_CPA_BASE_URL`：默认 `http://8.220.143.189:8319`
 - `RUNTIME_CPA_TOKEN`：默认 `114514`
+- `UPLOAD_API_URL`：默认 `${RUNTIME_CPA_BASE_URL}/v0/management/auth-files`
+- `UPLOAD_API_TOKEN`：默认 `${RUNTIME_CPA_TOKEN}`
 
 ### 注意
 
 镜像构建阶段会使用 `https://gpt-up.icoa.pp.ua/` 拉 domains；
 容器启动阶段会自动起本地 `CPA bridge`，并把配置指向 `http://127.0.0.1:$BRIDGE_PORT`。
+同时会把 `config.json` 里的 `upload_api_url` / `upload_api_token` 改成你的 CPA `auth-files` 接口，保证成功凭证会尝试上传到你的 CPA。
 
 ## GitHub Container Registry (GHCR)
 
