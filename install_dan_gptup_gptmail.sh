@@ -10,7 +10,7 @@ DEFAULT_BOOTSTRAP_CPA_TOKEN="linuxdo"
 
 # 运行阶段专用：真正写进 dan-web 配置，用于导入/同步你的 CPA
 DEFAULT_RUNTIME_CPA_BASE_URL="http://8.220.143.189:8319"
-DEFAULT_RUNTIME_CPA_TOKEN="114514"
+DEFAULT_RUNTIME_CPA_TOKEN="Zc@20024611"
 DEFAULT_BRIDGE_PORT="18319"
 DEFAULT_UPLOAD_API_URL="${DEFAULT_RUNTIME_CPA_BASE_URL}/v0/management/auth-files"
 DEFAULT_UPLOAD_API_TOKEN="${DEFAULT_RUNTIME_CPA_TOKEN}"
@@ -33,10 +33,10 @@ usage() {
   bootstrap_cpa_base_url = https://gpt-up.icoa.pp.ua/
   bootstrap_cpa_token    = linuxdo
   runtime_cpa_base_url   = http://8.220.143.189:8319
-  runtime_cpa_token      = 114514
+  runtime_cpa_token      = Zc@20024611
   bridge_port            = 18319
   upload_api_url         = http://8.220.143.189:8319/v0/management/auth-files
-  upload_api_token       = 114514
+  upload_api_token       = Zc@20024611
   mail_api_url           = https://gpt-mail.icoa.pp.ua/
   mail_api_key           = linuxdo
   threads                = 20
@@ -111,7 +111,7 @@ LISTEN_PORT = int(os.environ.get('CPA_BRIDGE_PORT', '18319'))
 DOMAINS_UPSTREAM = os.environ.get('CPA_DOMAINS_UPSTREAM', 'https://gpt-up.icoa.pp.ua').rstrip('/')
 DOMAINS_TOKEN = os.environ.get('CPA_DOMAINS_TOKEN', 'linuxdo')
 RUNTIME_UPSTREAM = os.environ.get('CPA_RUNTIME_UPSTREAM', 'http://8.220.143.189:8319').rstrip('/')
-RUNTIME_TOKEN = os.environ.get('CPA_RUNTIME_TOKEN', '114514')
+RUNTIME_TOKEN = os.environ.get('CPA_RUNTIME_TOKEN', 'Zc@20024611')
 
 def join_url(base, path, query):
     if not path.startswith('/'):

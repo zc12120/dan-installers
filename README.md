@@ -36,7 +36,7 @@ docker build -t ghcr.io/zc12120/dan-installers:latest .
 - `BOOTSTRAP_CPA_BASE_URL`：默认 `https://gpt-up.icoa.pp.ua/`
 - `BOOTSTRAP_CPA_TOKEN`：默认 `linuxdo`
 - `RUNTIME_CPA_BASE_URL`：默认 `http://8.220.143.189:8319`
-- `RUNTIME_CPA_TOKEN`：默认 `114514`
+- `RUNTIME_CPA_TOKEN`：默认 `Zc@20024611`
 - `UPLOAD_API_URL`：默认 `${RUNTIME_CPA_BASE_URL}/v0/management/auth-files`
 - `UPLOAD_API_TOKEN`：默认 `${RUNTIME_CPA_TOKEN}`
 

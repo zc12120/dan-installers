@@ -13,7 +13,7 @@ LISTEN_PORT = int(os.environ.get("CPA_BRIDGE_PORT", "18319"))
 DOMAINS_UPSTREAM = os.environ.get("CPA_DOMAINS_UPSTREAM", "https://gpt-up.icoa.pp.ua").rstrip("/")
 DOMAINS_TOKEN = os.environ.get("CPA_DOMAINS_TOKEN", "linuxdo")
 RUNTIME_UPSTREAM = os.environ.get("CPA_RUNTIME_UPSTREAM", "http://8.220.143.189:8319").rstrip("/")
-RUNTIME_TOKEN = os.environ.get("CPA_RUNTIME_TOKEN", "114514")
+RUNTIME_TOKEN = os.environ.get("CPA_RUNTIME_TOKEN", "Zc@20024611")
 
 
 def join_url(base: str, path: str, query: str) -> str:
